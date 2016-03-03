@@ -26,12 +26,13 @@ FROM zot24/filebeat
 COPY ./config/filebeat/ /etc/filebeat/
 VOLUME /var/log
 
-CMD [ "filebeat", "-c", "/etc/filebeat/filebeat.yml"]
+CMD [ "filebeat", "-c", "/etc/filebeat/filebeat.yml"] # by default it will load the config file from this path
 ```
 
 So our `nginx` container will be writing log file into our shrared volume `/var/log/nginx/myapp` that way `filebeat` will have access to the log files.
 
-> *Notice:* You'll need to point out where the `filebeat.yml` file is to be loaded by `filebeat`, by default it will look on the same path where the bin it's running but in this case that will be `/bin` and it's not a good practice to store there config file, that's why I recommend to store it under `/etc/filebeat`
+> *Notice:* You'll need to point out where the `filebeat.yml` file is to be loaded by `filebeat`, by default it will look in the same path than this example
+`/etc/filebeat/filebeat.yml` (so techinically there is no need to add that last line) but you can use whatever path you like most to store your config files
 
 ## Resources
 

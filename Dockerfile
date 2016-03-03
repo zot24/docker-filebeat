@@ -20,4 +20,4 @@ RUN set -ex \
   && rm -rf /tmp/filebeat* \
   && apk del .build-dependencies
 
-CMD [ "filebeat", "-e" ]
+CMD [ "filebeat", "-c", "/etc/filebeat/filebeat.yml" ]
