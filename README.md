@@ -1,6 +1,6 @@
 # Filebeat Docker image
 
-This is a Filebeat docker base image using [Alpine](http://alpinelinux.org/) Linux and based on the [primait/docker-filebeat](https://github.com/primait/docker-filebeat) docker image with just few modifications to make it even more basic, actually it won't be useful unless you set it as a base image and extend it using the `FROM` instruction.
+This is a Filebeat docker base image using [Alpine](http://alpinelinux.org/) Linux [modify version](https://hub.docker.com/r/frolvlad/alpine-glibc/) to support `glibc` used by `filebeat` and based on the [primait/docker-filebeat](https://github.com/primait/docker-filebeat) docker image with just few modifications to make it even more basic, actually it won't be useful unless you set it as a base image and extend it using the `FROM` instruction.
 
 ## Getting Started
 
@@ -21,11 +21,15 @@ filebeat:
 ```
 FROM zot24/filebeat
 
-ONBUILD COPY .config/filebeat/ /etc/filebeat/
+COPY ./config/filebeat/ /etc/filebeat/
 VOLUME /var/log
+
+CMD [ "filebeat", "-c", "/etc/filebeat/filebeat.yml"]
 ```
 
-So our `nginx` container will be writing log file into `/var/log/nginx/myapp` that way `filebeat` will have access to these.
+So our `nginx` container will be writing log file into our shrared volume `/var/log/nginx/myapp` that way `filebeat` will have access to the log files.
+
+> *Notice:* You'll need to point out where the `filebeat.yml` file is to be loaded by `filebeat`, by default it will look on the same path where the bin it's running but in this case that will be `/bin` and it's not a good practice to store there config file, that's why I recommend to store it under `/etc/filebeat`
 
 ## Resources
 
