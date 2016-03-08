@@ -2,7 +2,7 @@
 
 # Filebeat Docker image
 
-This is a Filebeat docker base image using [Alpine](http://alpinelinux.org/) Linux [modify version](https://hub.docker.com/r/frolvlad/alpine-glibc/) to support `glibc` used by `filebeat` and based on the [primait/docker-filebeat](https://github.com/primait/docker-filebeat) docker image with just few modifications to make it even more basic, actually it won't be useful unless you set it as a base image and extend it using the `FROM` instruction.
+This is a Filebeat docker base image using [Alpine](http://alpinelinux.org/) Linux [modify version](https://hub.docker.com/r/zot24/glibc/) to support `glibc` used by `filebeat` and based on the [primait/docker-filebeat](https://github.com/primait/docker-filebeat) docker image with just few modifications to make it even more basic, actually it won't be useful unless you set it as a base image and extend it using the `FROM` instruction.
 
 ## Getting Started
 
